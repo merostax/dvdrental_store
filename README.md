@@ -1,4 +1,4 @@
-# Dvdrental Store
+# Dvdrental Customer
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab-fi.ostfalia.de/lv-ftse-ws2324/team-10/dvdrental-store.git
+git remote add origin https://gitlab-fi.ostfalia.de/lv-ftse-ws2324/team-10/dvdrental-customer.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab-fi.ostfalia.de/lv-ftse-ws2324/team-10/dvdrental-store/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab-fi.ostfalia.de/lv-ftse-ws2324/team-10/dvdrental-customer/-/settings/integrations)
 
 ## Collaborate with your team
 
