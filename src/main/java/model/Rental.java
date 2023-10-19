@@ -16,7 +16,8 @@ public class Rental {
     private int rentalId;
     @Basic
     @Column(name = "rental_date", nullable = false)
-    private Timestamp rentalDate;
+    private Timestamp rentalDate ;
+
     @Basic
     @Column(name = "customer_id", nullable = false)
     private int customerId;
@@ -26,6 +27,10 @@ public class Rental {
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+    @PrePersist
+    protected void onCreate() {
+        lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
     @ManyToOne
     @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id", nullable = false)
     private Inventory inventoryByInventoryId;

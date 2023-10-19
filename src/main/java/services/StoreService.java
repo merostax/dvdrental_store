@@ -21,10 +21,10 @@ public class StoreService {
     private StoreRepository storeRepository;
 
     @GET
-    public List<Store> getAllStores() {
-        return storeRepository.getAllStores();
+    @Path("/count")
+    public Long getAllStores() {
+        return storeRepository.getStoreCount();
     }
-
     @GET
     @Path("/{id}")
     public Store getStoreById(@PathParam("id") int storeId) {
