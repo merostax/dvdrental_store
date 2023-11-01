@@ -7,7 +7,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import model.Inventory;
 import services.InventoryService;
 import services.RentalService;
 import services.StaffService;

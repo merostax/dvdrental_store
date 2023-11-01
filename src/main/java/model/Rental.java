@@ -28,7 +28,8 @@ public class Rental {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
     @PrePersist
-    protected void onCreate() {
+    @PreUpdate
+    protected void onUpdate() {
         lastUpdate = new Timestamp(System.currentTimeMillis());
     }
     @ManyToOne

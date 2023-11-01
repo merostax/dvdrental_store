@@ -1,6 +1,10 @@
 package services;
 
+import java.util.List;
+import java.util.Optional;
+
 import dtos.RentalDto;
+import dtos.RentalDtoGet;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -10,13 +14,14 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import model.Rental;
 import repository.RentalRepository;
+import util.DTOEntityUtil;
 import validators.RentalValidator;
 
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-@Path("/rentals")
+@Path("rentals")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
@@ -48,22 +53,39 @@ public class RentalService {
 
     @GET
     @Path("/{id}")
-    public Rental getRentalById(@PathParam("id") int id) {
-        return rentalRepository.getRentalById(id);
+    public Response getRentalById(@PathParam("id") int id) {
+        Optional<Rental> rentalOptional = Optional.ofNullable(rentalRepository.getRentalById(id));
+
+        if (rentalOptional.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Rental not found.")
+                    .build();
+        }
+        Rental rental = rentalOptional.get();
+        RentalDtoGet rentalDto = DTOEntityUtil.createRentalDtoGET(rental);
+        return Response.ok(rentalDto).build();
     }
+
 
     @PUT
     @Path("/{id}/returned")
     public Response markRentalReturned(@PathParam("id") int id) {
-        Rental rental = rentalRepository.getRentalById(id);
-        if (rental == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        Optional<Rental> rentalOptional = Optional.ofNullable(rentalRepository.getRentalById(id));
+
+        if (rentalOptional.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Rental not found.")
+                    .build();
         }
+
+        Rental rental = rentalOptional.get();
+
         if (rental.getReturnDate() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Rental already terminated.")
                     .build();
         }
+
         Timestamp currentTimestamp = Timestamp.from(Instant.now());
         rental.setReturnDate(currentTimestamp);
 
@@ -71,6 +93,21 @@ public class RentalService {
 
         return Response.status(Response.Status.OK)
                 .entity("Rental is terminated.")
+                .build();
+    }
+
+    @GET
+    @Path("film/{id}/check")
+    public Response checkRentalStatus(@PathParam("id") int id) {
+        List<Rental> rentals = rentalRepository.getRentalsByFilmId(id);
+        if (!rentals.isEmpty()) {
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity("Film has associated rentals and cannot be deleted")
+                    .build();
+        }
+
+        return Response.status(Response.Status.OK)
+                .entity("No associated rentals found. Film can be deleted.")
                 .build();
     }
 }

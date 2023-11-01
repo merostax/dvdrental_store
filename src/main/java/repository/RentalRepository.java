@@ -4,6 +4,7 @@ import dtos.RentalDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import model.Inventory;
 import model.Rental;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @ApplicationScoped
 public class RentalRepository {
@@ -60,5 +62,17 @@ public class RentalRepository {
     public Rental updateRental(Rental rental) {
         EntityManager em = entityManagerProvider.getEntityManager();
         return em.merge(rental);
+    }
+
+    @Transactional
+    public List<Rental> getRentalsByFilmId(int filmId) {
+        EntityManager em = entityManagerProvider.getEntityManager();
+        TypedQuery<Rental> query = em.createQuery(
+                "SELECT r FROM Rental r WHERE r.inventoryByInventoryId.filmId = :filmId",
+                Rental.class
+        );
+        query.setParameter("filmId", filmId);
+
+        return query.getResultList();
     }
 }
