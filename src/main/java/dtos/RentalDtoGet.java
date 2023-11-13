@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class RentalDtoGet {
     private int rentalId;
     private Timestamp rentalDate;
     private Timestamp returnDate;
-    private String customer;
-    private String store;
-    private String film;
+    private Map<String,String> customer;
+    private Map<String,String> store;
+    private Map<String,String> film;
 }

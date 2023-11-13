@@ -10,11 +10,14 @@ import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import model.Rental;
 import repository.RentalRepository;
 import util.DTOEntityUtil;
+import util.Hrefs;
 import validators.RentalValidator;
 
 import java.sql.Timestamp;
@@ -30,14 +33,17 @@ public class RentalService {
     private RentalRepository rentalRepository;
     @Inject
     private RentalValidator rentalValidator;
-
+    @Context
+    private UriInfo uriInfo;
     @POST
     public Response createRental(@Valid RentalDto rentalDto) {
+
         try {
             if (rentalValidator.isvalidRental(rentalDto)) {
-                rentalRepository.createRental(rentalDto);
+              Rental rental=  rentalRepository.createRental(rentalDto);
                 return Response.status(Response.Status.CREATED)
                         .entity("Rental created")
+                        .header("location", Hrefs.STORE.getHref()+"rentals/"+rental.getRentalId())
                         .build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST)

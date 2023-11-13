@@ -7,13 +7,19 @@ import model.Staff;
 import model.Store;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DTOEntityUtil {
     public static InventoryDTO createInventoryDTO(Inventory inventory) {
         InventoryDTO inventoryDTO = new InventoryDTO();
         inventoryDTO.setId(inventory.getInventoryId());
-        inventoryDTO.setFilm(Hrefs.FILM.getHref() + "films/" + inventory.getFilmId());
-        inventoryDTO.setStore(Hrefs.STORE.getHref() + "stores/" + inventory.getFilmId());
+        Map<String, String> filmhref = new HashMap<>();
+        filmhref.put("href",Hrefs.FILM.getHref() + "films/" + inventory.getFilmId());
+        Map<String, String> storeHref = new HashMap<>();
+        storeHref.put("href",Hrefs.STORE.getHref() + "stores/" + inventory.getFilmId());
+        inventoryDTO.setFilm(filmhref);
+        inventoryDTO.setStore(storeHref);
         return inventoryDTO;
     }
 
@@ -22,11 +28,20 @@ public class DTOEntityUtil {
         rentalDTO.setRentalId(rental.getRentalId());
         rentalDTO.setRentalDate(rental.getRentalDate());
         rentalDTO.setReturnDate(rental.getReturnDate());
-        rentalDTO.setCustomer(Hrefs.CUSTOMER.getHref()+"customers/" + rental.getCustomerId());
-        rentalDTO.setStore(Hrefs.STORE.getHref()+"stores/"+rental.getInventoryByInventoryId().getStoreByStoreId().getStoreId());
-        rentalDTO.setFilm(Hrefs.FILM.getHref()+"films/"+rental.getInventoryByInventoryId().getFilmId());
+        Map<String, String> customerHref = new HashMap<>();
+        customerHref.put("href", Hrefs.CUSTOMER.getHref() + "customers/" + rental.getCustomerId());
+        rentalDTO.setCustomer(customerHref);
+        Inventory inventory = rental.getInventoryByInventoryId();
+        Map<String, String> storeHref = new HashMap<>();
+        storeHref.put("href", Hrefs.STORE.getHref() + "stores/" + inventory.getStoreByStoreId().getStoreId());
+        rentalDTO.setStore(storeHref);
+        Map<String, String> filmHref = new HashMap<>();
+        filmHref.put("href", Hrefs.FILM.getHref() + "films/" + inventory.getFilmId());
+        rentalDTO.setFilm(filmHref);
+
         return rentalDTO;
     }
+
 
     public static UserDTO createUserDTO(Staff staff) {
         UserDTO userDTO = new UserDTO();

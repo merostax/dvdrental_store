@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,6 +15,6 @@ import lombok.Setter;
 @JsonbPropertyOrder({"id", "store", "film"})
 public class InventoryDTO {
     private int id;
-    private String store;
-    private String film;
+    private Map<String,String> store;
+    private Map<String,String> film;
 }
