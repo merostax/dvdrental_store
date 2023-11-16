@@ -1,16 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
 public class Staff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -47,5 +41,91 @@ public class Staff {
     @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
     private Address addressByAddressId;
 
+    public int getStaffId() {
+        return this.staffId;
+    }
 
+    public void setStaffId(final int staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public int getStoreId() {
+        return this.storeId;
+    }
+
+    public void setStoreId(final int storeId) {
+        this.storeId = storeId;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(final boolean active) {
+        this.active = active;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setLastUpdate(final Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public byte[] getPicture() {
+        return this.picture;
+    }
+
+    public void setPicture(final byte[] picture) {
+        this.picture = picture;
+    }
+
+    public Address getAddressByAddressId() {
+        return this.addressByAddressId;
+    }
+
+    public void setAddressByAddressId(final Address addressByAddressId) {
+        this.addressByAddressId = addressByAddressId;
+    }
 }

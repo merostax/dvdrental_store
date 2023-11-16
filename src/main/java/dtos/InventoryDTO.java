@@ -1,20 +1,36 @@
 package dtos;
 
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Map;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @JsonbPropertyOrder({"id", "store", "film"})
 public class InventoryDTO {
     private int id;
     private Map<String,String> store;
     private Map<String,String> film;
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
+    public Map<String, String> getStore() {
+        return this.store;
+    }
+
+    public void setStore(final Map<String, String> store) {
+        this.store = store;
+    }
+
+    public Map<String, String> getFilm() {
+        return this.film;
+    }
+
+    public void setFilm(final Map<String, String> film) {
+        this.film = film;
+    }
 }

@@ -1,15 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
 public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -25,5 +20,35 @@ public class City {
     @JoinColumn(name = "country_id", referencedColumnName = "country_id", nullable = false)
     private Country countryByCountryId;
 
+    public int getCityId() {
+        return this.cityId;
+    }
 
+    public void setCityId(final int cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public void setCity(final String city) {
+        this.city = city;
+    }
+
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setLastUpdate(final Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Country getCountryByCountryId() {
+        return this.countryByCountryId;
+    }
+
+    public void setCountryByCountryId(final Country countryByCountryId) {
+        this.countryByCountryId = countryByCountryId;
+    }
 }

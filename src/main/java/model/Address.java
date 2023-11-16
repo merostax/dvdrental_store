@@ -1,15 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
 public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -38,6 +33,67 @@ public class Address {
     @JoinColumn(name = "city_id", referencedColumnName = "city_id", nullable = false)
     private City cityByCityId;
 
+    public int getAddressId() {
+        return this.addressId;
+    }
 
+    public void setAddressId(final int addressId) {
+        this.addressId = addressId;
+    }
 
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(final String address) {
+        this.address = address;
+    }
+
+    public String getAddress2() {
+        return this.address2;
+    }
+
+    public void setAddress2(final String address2) {
+        this.address2 = address2;
+    }
+
+    public String getDistrict() {
+        return this.district;
+    }
+
+    public void setDistrict(final String district) {
+        this.district = district;
+    }
+
+    public String getPostalCode() {
+        return this.postalCode;
+    }
+
+    public void setPostalCode(final String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone(final String phone) {
+        this.phone = phone;
+    }
+
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setLastUpdate(final Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public City getCityByCityId() {
+        return this.cityByCityId;
+    }
+
+    public void setCityByCityId(final City cityByCityId) {
+        this.cityByCityId = cityByCityId;
+    }
 }

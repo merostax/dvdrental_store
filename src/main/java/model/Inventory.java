@@ -1,15 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
 public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,4 +21,35 @@ public class Inventory {
     @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
     private Store storeByStoreId;
 
+    public int getInventoryId() {
+        return this.inventoryId;
+    }
+
+    public void setInventoryId(final int inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
+    public int getFilmId() {
+        return this.filmId;
+    }
+
+    public void setFilmId(final int filmId) {
+        this.filmId = filmId;
+    }
+
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setLastUpdate(final Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Store getStoreByStoreId() {
+        return this.storeByStoreId;
+    }
+
+    public void setStoreByStoreId(final Store storeByStoreId) {
+        this.storeByStoreId = storeByStoreId;
+    }
 }

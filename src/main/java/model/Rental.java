@@ -1,14 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
 public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -39,4 +35,59 @@ public class Rental {
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", nullable = false)
     private Staff staffByStaffId;
 
+    public int getRentalId() {
+        return this.rentalId;
+    }
+
+    public void setRentalId(final int rentalId) {
+        this.rentalId = rentalId;
+    }
+
+    public Timestamp getRentalDate() {
+        return this.rentalDate;
+    }
+
+    public void setRentalDate(final Timestamp rentalDate) {
+        this.rentalDate = rentalDate;
+    }
+
+    public int getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(final int customerId) {
+        this.customerId = customerId;
+    }
+
+    public Timestamp getReturnDate() {
+        return this.returnDate;
+    }
+
+    public void setReturnDate(final Timestamp returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setLastUpdate(final Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Inventory getInventoryByInventoryId() {
+        return this.inventoryByInventoryId;
+    }
+
+    public void setInventoryByInventoryId(final Inventory inventoryByInventoryId) {
+        this.inventoryByInventoryId = inventoryByInventoryId;
+    }
+
+    public Staff getStaffByStaffId() {
+        return this.staffByStaffId;
+    }
+
+    public void setStaffByStaffId(final Staff staffByStaffId) {
+        this.staffByStaffId = staffByStaffId;
+    }
 }
