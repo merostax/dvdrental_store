@@ -11,7 +11,7 @@ public class RentalDto {
         return this.inventory;
     }
 
-    public void setInventory(final int inventory) {
+    public void setInventory( int inventory) {
         this.inventory = inventory;
     }
 
@@ -19,7 +19,7 @@ public class RentalDto {
         return this.customer;
     }
 
-    public void setCustomer(final int customer) {
+    public void setCustomer( int customer) {
         this.customer = customer;
     }
 
@@ -27,7 +27,7 @@ public class RentalDto {
         return this.staff;
     }
 
-    public void setStaff(final int staff) {
+    public void setStaff(int staff) {
         this.staff = staff;
     }
 
@@ -35,7 +35,7 @@ public class RentalDto {
         return this.date;
     }
 
-    public void setDate(final String date) {
+    public void setDate( String date) {
         this.date = date;
     }
 }

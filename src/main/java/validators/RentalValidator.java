@@ -4,7 +4,6 @@ import clienTargetRepository.CustomerServiceClientProvider;
 import dtos.RentalDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.validation.Validator;
 import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.MediaType;
@@ -31,7 +30,7 @@ public class RentalValidator {
                 isValidInventory(rentalDto.getInventory());
     }
 
-    private boolean isValidInventory(@Min(1) int inventoryID) {
+    public boolean isValidInventory(@Min(1) int inventoryID) {
            return inventoryRepository.getInventoryById(inventoryID)!=null;
     }
 

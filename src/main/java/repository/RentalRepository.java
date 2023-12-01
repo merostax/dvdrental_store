@@ -4,12 +4,12 @@ import dtos.RentalDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import model.Inventory;
 import model.Rental;
 import model.Staff;
-import util.EntityManagerProvider;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -23,12 +23,11 @@ public class RentalRepository {
     InventoryRepository inventoryRepository;
     @Inject
     StaffRepository staffersRepository;
-    @Inject
-    private EntityManagerProvider entityManagerProvider;
+    @PersistenceContext
+    EntityManager em;
 
     @Transactional
     public Rental createRental(RentalDto rentaldto) {
-        EntityManager em = entityManagerProvider.getEntityManager();
         Inventory inventory = inventoryRepository.getInventoryById(rentaldto.getInventory());
         Staff staff = staffersRepository.getStaffById(rentaldto.getStaff());
 
@@ -54,19 +53,16 @@ public class RentalRepository {
 
     @Transactional
     public Rental getRentalById(int id) {
-        EntityManager em = entityManagerProvider.getEntityManager();
         return em.find(Rental.class, id);
     }
 
     @Transactional
     public Rental updateRental(Rental rental) {
-        EntityManager em = entityManagerProvider.getEntityManager();
         return em.merge(rental);
     }
 
     @Transactional
     public List<Rental> getRentalsByFilmId(int filmId) {
-        EntityManager em = entityManagerProvider.getEntityManager();
         TypedQuery<Rental> query = em.createQuery(
                 "SELECT r FROM Rental r WHERE r.inventoryByInventoryId.filmId = :filmId",
                 Rental.class
