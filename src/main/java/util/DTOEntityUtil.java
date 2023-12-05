@@ -15,9 +15,9 @@ public class DTOEntityUtil {
         InventoryDTO inventoryDTO = new InventoryDTO();
         inventoryDTO.setId(inventory.getInventoryId());
         Map<String, String> filmhref = new HashMap<>();
-        filmhref.put("href",Hrefs.FILM.getHref() + "films/" + inventory.getFilmId());
+        filmhref.put("href",Hrefs.FILM.getHref()!=null?Hrefs.FILM.getHref() + "films/" + inventory.getFilmId():"");
         Map<String, String> storeHref = new HashMap<>();
-        storeHref.put("href",Hrefs.STORE.getHref() + "stores/" + inventory.getFilmId());
+        storeHref.put("href",Hrefs.STORE.getHref()!=null?Hrefs.STORE.getHref() + "stores/" + inventory.getFilmId():"");
         inventoryDTO.setFilm(filmhref);
         inventoryDTO.setStore(storeHref);
         return inventoryDTO;
@@ -29,14 +29,14 @@ public class DTOEntityUtil {
         rentalDTO.setRentalDate(rental.getRentalDate());
         rentalDTO.setReturnDate(rental.getReturnDate());
         Map<String, String> customerHref = new HashMap<>();
-        customerHref.put("href", Hrefs.CUSTOMER.getHref() + "customers/" + rental.getCustomerId());
+        customerHref.put("href", Hrefs.CUSTOMER.getHref()!=null?Hrefs.CUSTOMER.getHref() + "customers/" + rental.getCustomerId():"");
         rentalDTO.setCustomer(customerHref);
         Inventory inventory = rental.getInventoryByInventoryId();
         Map<String, String> storeHref = new HashMap<>();
-        storeHref.put("href", Hrefs.STORE.getHref() + "stores/" + inventory.getStoreByStoreId().getStoreId());
+        storeHref.put("href", Hrefs.STORE.getHref()!=null?Hrefs.STORE.getHref() + "stores/" + inventory.getStoreByStoreId().getStoreId():"");
         rentalDTO.setStore(storeHref);
         Map<String, String> filmHref = new HashMap<>();
-        filmHref.put("href", Hrefs.FILM.getHref() + "films/" + inventory.getFilmId());
+        filmHref.put("href", Hrefs.FILM.getHref()!=null?Hrefs.FILM.getHref() + "films/" + inventory.getFilmId():"");
         rentalDTO.setFilm(filmHref);
 
         return rentalDTO;

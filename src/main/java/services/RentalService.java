@@ -43,7 +43,7 @@ public class RentalService {
               Rental rental=  rentalRepository.createRental(rentalDto);
                 return Response.status(Response.Status.CREATED)
                         .entity("Rental created")
-                        .header("location", Hrefs.STORE.getHref()+"rentals/"+rental.getRentalId())
+                        .header("location", Hrefs.STORE.getHref()!=null?Hrefs.STORE.getHref()+"rentals/"+rental.getRentalId():"")
                         .build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST)
