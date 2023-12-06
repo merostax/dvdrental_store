@@ -21,7 +21,7 @@ podman build -t $STORE_CONTAINER_NAME_POSTGRES --build-arg SQL_FILE=$STORE_DB_SQ
 DB_CONTAINER_ID=$(podman run -d --pod  $PODNAME  $STORE_CONTAINER_NAME_POSTGRES)
 
 
-mvn clean  package -Pnative  -f pom-quarkus.xml
+mvn clean  package   -f pom-quarkus.xml
  sleep 5
 
 ./target/starter-1.0-runner & disown

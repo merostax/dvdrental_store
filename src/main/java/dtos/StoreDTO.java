@@ -10,7 +10,7 @@ public class StoreDTO {
         return this.id;
     }
 
-    public void setId(final int id) {
+    public void setId( int id) {
         this.id = id;
     }
 }
