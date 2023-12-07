@@ -33,8 +33,9 @@ public class RentalService {
     private RentalRepository rentalRepository;
     @Inject
     private RentalValidator rentalValidator;
-    @Context
-    private UriInfo uriInfo;
+    @Inject DTOEntityUtil DTOEntityUtil;
+    @Inject
+    Hrefs hrefs;
     @POST
     public Response createRental(@Valid RentalDto rentalDto) {
 
@@ -43,7 +44,7 @@ public class RentalService {
               Rental rental=  rentalRepository.createRental(rentalDto);
                 return Response.status(Response.Status.CREATED)
                         .entity("Rental created")
-                        .header("location", Hrefs.STORE.getHref()!=null?Hrefs.STORE.getHref()+"rentals/"+rental.getRentalId():"")
+                        .header("location", hrefs.getStoreHref()!=null?hrefs.getStoreHref()+"rentals/"+rental.getRentalId():"")
                         .build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST)

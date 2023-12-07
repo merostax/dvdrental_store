@@ -11,12 +11,15 @@ import jakarta.ws.rs.core.Response;
 import model.Staff;
 import repository.StaffRepository;
 import util.DTOEntityUtil;
+import util.Hrefs;
 
 @Path("staff")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class StaffService {
+    @Inject DTOEntityUtil DTOEntityUtil;
+
     @Inject
     private StaffRepository staffRepository;
 

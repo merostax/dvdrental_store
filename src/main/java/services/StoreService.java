@@ -11,12 +11,14 @@ import jakarta.ws.rs.core.Response;
 import model.Store;
 import repository.StoreRepository;
 import util.DTOEntityUtil;
+import util.Hrefs;
 
 @Path("stores")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class StoreService {
+    @Inject DTOEntityUtil DTOEntityUtil;
 
     @Inject
     private StoreRepository storeRepository;

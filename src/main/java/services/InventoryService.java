@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class InventoryService {
     @Inject
     private InventoryRepository inventoryRepository;
-
+    @Inject DTOEntityUtil DTOEntityUtil;
     @GET
     @Path("/film/{filmId}")
     public Response getInventoriesByFilmId(@PathParam("filmId") int filmId) {
