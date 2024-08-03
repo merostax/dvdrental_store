@@ -1,4 +1,8 @@
-source .env
+#!/bin/bash
+
+# Load environment variables
+.  .env
+
 
 
 DOCKERFILE_DB_PATH="./docker/db/Dockerfile"
